@@ -1,0 +1,24 @@
+[build-system]
+requires=["setuptools>=42"]
+build-backend="setuptools.build_meta"
+
+[project]
+name = "Hypixel"
+description = "gets info from hypixel API"
+readme = "README.md"
+requires-python = ">=3.6"
+dependencies = [
+	"rich",
+	"typer",
+	"pandas"
+]
+dynamic = ["version"]
+
+[project.scripts]
+hypixel = "hypixel.cli:main"
+
+ [tool.setuptools]
+ packages = ["hypixel"]
+
+[tool.setuptools.dynamic]
+version = {attr = "hypixel.__VERSION__"}
