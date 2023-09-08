@@ -1,2 +1,3 @@
 .direnv
 src/__pycache__
+hypixel/__pycache__
