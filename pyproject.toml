@@ -10,12 +10,13 @@ requires-python = ">=3.10"
 dependencies = [
 	"rich",
 	"typer",
-  "python-dotenv"
+  "python-dotenv",
+  "requests",
 ]
 dynamic = ["version"]
 
 [project.scripts]
-hypixel = "flipper.cli:call"
+flipper = "flipper.cli:call"
 
 [tool.setuptools]
 packages = ["flipper"]
