@@ -21,5 +21,16 @@
         packages = with pkgs; [ python3 ] ++
           (with pkgs.python3Packages; [ pip requests typer python-dotenv rich ]);
       };
+
+      packages.default = with pkgs.python3Packages;
+        buildPythonApplication {
+          pname = "flipper";
+          version = "0.1";
+          format = "pyproject";
+
+          propagatedBulidInputs = [ requests typer rich python-dotenv];
+
+          src = ./.;
+        };
     });
 }
