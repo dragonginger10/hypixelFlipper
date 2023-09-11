@@ -28,7 +28,7 @@
           version = "0.1";
           format = "pyproject";
 
-          propagatedBulidInputs = [ requests typer rich python-dotenv];
+          propagatedBulidInputs = [ setuptools requests typer rich python-dotenv];
 
           src = ./.;
         };
