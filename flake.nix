@@ -19,7 +19,7 @@
     {
       devShells.default = pkgs.mkShell {
         packages = with pkgs; [ python3 ] ++
-          (with pkgs.python3Packages; [ pip requests typer python-dotenv ]);
+          (with pkgs.python3Packages; [ pip requests typer python-dotenv rich ]);
       };
     });
 }
