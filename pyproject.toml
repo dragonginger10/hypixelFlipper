@@ -15,7 +15,7 @@ dependencies = [
 dynamic = ["version"]
 
 [project.scripts]
-hypixel = "flipper.cli:main"
+hypixel = "flipper.cli:call"
 
  [tool.setuptools]
  packages = ["flipper"]
