@@ -6,19 +6,19 @@ build-backend="setuptools.build_meta"
 name = "flipper"
 description = "gets info from hypixel API"
 readme = "README.md"
-requires-python = ">=3.6"
+requires-python = ">=3.10"
 dependencies = [
 	"rich",
 	"typer",
-  "dotenv"
+  "python-dotenv"
 ]
 dynamic = ["version"]
 
 [project.scripts]
 hypixel = "flipper.cli:call"
 
- [tool.setuptools]
- packages = ["flipper"]
+[tool.setuptools]
+packages = ["flipper"]
 
 [tool.setuptools.dynamic]
 version = {attr = "flipper.__VERSION__"}
