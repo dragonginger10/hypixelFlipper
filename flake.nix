@@ -23,13 +23,13 @@
       packages = rec {
         default = flipper;
 
-        flipper = with pkgs.python3Packages;
+        flipper = with pkgs.python310Packages;
           buildPythonApplication {
             pname = "flipper";
             version = "0.1";
             format = "pyproject";
 
-            propagatedBulidInputs = [setuptools requests typer rich python-dotenv];
+            propagatedBuildInputs = [setuptools requests typer rich python-dotenv];
 
             src = ./.;
           };
