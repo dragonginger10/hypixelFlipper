@@ -17,7 +17,7 @@
       devShells.default = pkgs.mkShell {
         packages = with pkgs;
           [python3]
-          ++ (with pkgs.python3Packages; [pip requests typer python-dotenv rich]);
+          ++ (with pkgs.python3Packages; [pip requests typer python-dotenv rich pandas]);
       };
 
       packages = rec {
@@ -29,7 +29,7 @@
             version = "0.1";
             format = "pyproject";
 
-            propagatedBuildInputs = [setuptools requests typer rich python-dotenv];
+            propagatedBuildInputs = [setuptools requests typer rich ];
 
             src = ./.;
           };
