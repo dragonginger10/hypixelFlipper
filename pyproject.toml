@@ -3,22 +3,21 @@ requires=["setuptools>=42"]
 build-backend="setuptools.build_meta"
 
 [project]
-name = "Hypixel"
+name = "flipper"
 description = "gets info from hypixel API"
 readme = "README.md"
 requires-python = ">=3.6"
 dependencies = [
 	"rich",
 	"typer",
-	"pandas"
 ]
 dynamic = ["version"]
 
 [project.scripts]
-hypixel = "hypixel.cli:main"
+hypixel = "flipper.cli:main"
 
  [tool.setuptools]
- packages = ["hypixel"]
+ packages = ["flipper"]
 
 [tool.setuptools.dynamic]
-version = {attr = "hypixel.__VERSION__"}
+version = {attr = "flipper.__VERSION__"}
