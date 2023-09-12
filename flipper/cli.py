@@ -7,7 +7,7 @@ console = Console()
 def main():
     df = finalDf()
 
-    table = Table(show_header=True, header_style="bold cyan")
+    table = Table("Bazaar Flips", show_header=True, header_style="bold cyan")
 
     table = printOut(df, table, False)
     console.print(table)
