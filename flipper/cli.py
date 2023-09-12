@@ -8,16 +8,18 @@ from flipper import __version__
 from flipper.getData import finalDf, printOut
 
 console = Console()
+app = typer.Typer()
 
-def version_callback(value: bool):
+def _version_callback(value: bool = False):
     if value:
         print(f"Awesome CLI Version: {__version__}")
         raise typer.Exit()
 
+@app.command()
 def main(
     version: Annotated[
-        Optional[bool], 
-        typer.Option(None, "--version", callback=version_callback, is_eager=True)
+        bool, 
+        typer.Option("--version", callback=_version_callback, is_eager=True)
     ] = None
 ):
     df = finalDf()
@@ -26,6 +28,4 @@ def main(
 
     table = printOut(df, table, False)
     console.print(table)
-
-if __name__ == "__main__":
-    typer.run(main)
+    raise typer.Exit()
