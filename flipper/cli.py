@@ -29,4 +29,3 @@ def main(
 
     table = printOut(df, table, False)
     console.print(table)
-    raise typer.Exit()
