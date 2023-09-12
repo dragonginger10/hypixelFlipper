@@ -10,7 +10,6 @@ requires-python = ">=3.10"
 dependencies = [
 	"rich",
 	"typer",
-  "python-dotenv",
   "requests",
 ]
 dynamic = ["version"]
