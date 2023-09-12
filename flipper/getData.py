@@ -9,7 +9,10 @@ BAZAAR = "https://api.hypixel.net/skyblock/bazaar"
 ITEMS = "https://api.hypixel.net/resources/skyblock/items"
 
 
-def getBazaar() -> pd.DataFrame:
+def getBazaar(
+    instabuys: int,
+    profit: float,
+    ) -> pd.DataFrame:
     response = requests.get(BAZAAR)
 
     if response.status_code != 200:
@@ -26,12 +29,15 @@ def getBazaar() -> pd.DataFrame:
         buy_price = products[i]["quick_status"]["buyPrice"]
         buy_week = products[i]["quick_status"]["buyMovingWeek"]
 
+        if buy_week < instabuys:
+            continue
+
         if sell_price == 0 or buy_price == 0:
             continue
 
         margin = buy_price / sell_price
 
-        if margin < 50:
+        if margin < profit:
             continue
 
         data = {
@@ -39,7 +45,7 @@ def getBazaar() -> pd.DataFrame:
             "Sell Price": "${:,.2f}".format(sell_price),
             "Buy Price": "${:,.2f}".format(buy_price),
             "Instabuys last 7 days": buy_week,
-            "Profit Margin": "{:,.1f}%".format(margin),
+            "Profit Margin": margin,
         }
 
         results.append(data)
@@ -68,7 +74,8 @@ def itemNames() -> pd.DataFrame:
         if npc_sell is None:
             continue
 
-        data = {"ID": id, "Name": name, "NPC Sell Price": "${:,.2f}".format(npc_sell)}
+        data = {"ID": id, "Name": name, "NPC Sell Price": npc_sell}
+
 
         results.append(data)
 
@@ -77,16 +84,16 @@ def itemNames() -> pd.DataFrame:
     return df
 
 
-def finalDf() -> pd.DataFrame:
-    bazaarDf = getBazaar()
-    namesDf = itemNames()
-
-    merged = pd.merge(bazaarDf, namesDf)
+def finalDf(
+    df1: pd.DataFrame,
+    df2: pd.DataFrame,
+    ) -> pd.DataFrame:
+    merged = pd.merge(df1, df2)
     merged.pop("ID")
     names = merged.pop("Name")
     merged.insert(0, "Name", names)
 
-    return merged.sort_values(by=["Profit Margin"])
+    return merged.sort_values(by=["Profit Margin"], ascending=False)
 
 
 def printOut(
@@ -102,9 +109,10 @@ def printOut(
     for column in pandas_dataframe.columns:
         rich_table.add_column(str(column))
 
-    for index, value_list in enumerate(pandas_dataframe.values.tolist()):
+    for index, value_list in enumerate(pandas_dataframe.to_numpy()):
         row = [str(index)] if show_index else []
         row += [str(x) for x in value_list]
-        rich_table.add_row(*row)
+        name, sellPrice, buyPrice, instaBuys, margin, npcPrice = row
+        rich_table.add_row(name, sellPrice, buyPrice, instaBuys, "{:,.1f}%".format(float(margin)), "${:,.2f}".format(float(npcPrice)))
 
     return rich_table
