@@ -1,8 +1,8 @@
-import sys
 import pandas as pd
 from typing import Optional
 
 from rich.table import Table
+import typer
 
 import requests
 
@@ -14,7 +14,7 @@ def getBazaar() -> pd.DataFrame:
 
     if response.status_code != 200:
         print("API call failed")
-        sys.exit(1)
+        raise typer.Exit(code=1)
 
     r_json = response.json()
     products = r_json["products"]
@@ -54,7 +54,7 @@ def itemNames() -> pd.DataFrame:
 
     if response.status_code != 200:
         print("API call failed.") 
-        sys.exit(1)
+        raise typer.Exit(code=1)
 
     items = response.json()
 
@@ -65,7 +65,7 @@ def itemNames() -> pd.DataFrame:
         name = item["name"]
         npc_sell = item.get("npc_sell_price")
 
-        if npc_sell == None:
+        if npc_sell is None:
             continue
 
         data = {
