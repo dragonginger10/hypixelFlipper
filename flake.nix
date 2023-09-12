@@ -14,10 +14,12 @@
     flake-utils.lib.eachDefaultSystem (system: let
       pkgs = import nixpkgs {inherit system;};
     in {
+      formatter = pkgs.alejandra;
+
       devShells.default = pkgs.mkShell {
         packages = with pkgs;
           [python3]
-          ++ (with pkgs.python3Packages; [pip requests typer python-dotenv rich pandas]);
+          ++ (with pkgs.python3Packages; [pip requests typer python-dotenv rich pandas black isort]);
       };
 
       packages = rec {
