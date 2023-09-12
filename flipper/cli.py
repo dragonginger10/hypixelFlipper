@@ -10,18 +10,18 @@ from flipper.getData import finalDf, printOut
 console = Console()
 app = typer.Typer()
 
+
 def _version_callback(value: bool = False):
     if value:
         print(f"Awesome CLI Version: {__version__}")
         raise typer.Exit()
 
+
 @app.command()
 def main(
     version: Optional[bool] = typer.Option(
-        None, 
-        "--version", 
-        callback=_version_callback, 
-        is_eager=True)
+        None, "--version", callback=_version_callback, is_eager=True
+    )
 ):
     df = finalDf()
 

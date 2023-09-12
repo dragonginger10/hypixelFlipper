@@ -1,13 +1,13 @@
-import pandas as pd
 from typing import Optional
 
-from rich.table import Table
-import typer
-
+import pandas as pd
 import requests
+import typer
+from rich.table import Table
 
-BAZAAR="https://api.hypixel.net/skyblock/bazaar"
+BAZAAR = "https://api.hypixel.net/skyblock/bazaar"
 ITEMS = "https://api.hypixel.net/resources/skyblock/items"
+
 
 def getBazaar() -> pd.DataFrame:
     response = requests.get(BAZAAR)
@@ -29,7 +29,7 @@ def getBazaar() -> pd.DataFrame:
         if sell_price == 0 or buy_price == 0:
             continue
 
-        margin = buy_price/sell_price
+        margin = buy_price / sell_price
 
         if margin < 50:
             continue
@@ -39,7 +39,7 @@ def getBazaar() -> pd.DataFrame:
             "Sell Price": "${:,.2f}".format(sell_price),
             "Buy Price": "${:,.2f}".format(buy_price),
             "Instabuys last 7 days": buy_week,
-            "Profit Margin": "{:,.1f}%".format(margin)
+            "Profit Margin": "{:,.1f}%".format(margin),
         }
 
         results.append(data)
@@ -53,7 +53,7 @@ def itemNames() -> pd.DataFrame:
     response = requests.get(ITEMS)
 
     if response.status_code != 200:
-        print("API call failed.") 
+        print("API call failed.")
         raise typer.Exit(code=1)
 
     items = response.json()
@@ -68,17 +68,14 @@ def itemNames() -> pd.DataFrame:
         if npc_sell is None:
             continue
 
-        data = {
-            "ID": id,
-            "Name": name,
-            "NPC Sell Price": "${:,.2f}".format(npc_sell) 
-        }
+        data = {"ID": id, "Name": name, "NPC Sell Price": "${:,.2f}".format(npc_sell)}
 
         results.append(data)
 
     df = pd.DataFrame(results)
 
     return df
+
 
 def finalDf() -> pd.DataFrame:
     bazaarDf = getBazaar()
@@ -91,13 +88,13 @@ def finalDf() -> pd.DataFrame:
 
     return merged.sort_values(by=["Profit Margin"])
 
+
 def printOut(
     pandas_dataframe: pd.DataFrame,
     rich_table: Table,
     show_index: bool = True,
     index_name: Optional[str] = None,
-    ) -> Table:
-
+) -> Table:
     if show_index:
         index_name = str(index_name) if index_name else ""
         rich_table.add_column(index_name)
