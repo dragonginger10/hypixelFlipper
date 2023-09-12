@@ -1,4 +1,4 @@
-from typing import Optional, Annotated
+from typing import Optional
 
 import typer
 from rich.console import Console
@@ -17,10 +17,11 @@ def _version_callback(value: bool = False):
 
 @app.command()
 def main(
-    version: Annotated[
-        bool, 
-        typer.Option("--version", callback=_version_callback, is_eager=True)
-    ] = None
+    version: Optional[bool] = typer.Option(
+        None, 
+        "--version", 
+        callback=_version_callback, 
+        is_eager=True)
 ):
     df = finalDf()
 
