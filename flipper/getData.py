@@ -31,6 +31,9 @@ def getBazaar() -> pd.DataFrame:
 
         margin = buy_price/sell_price
 
+        if margin < 50:
+            continue
+
         data = {
             "ID": id,
             "Sell Price": "${:,.2f}".format(sell_price),
@@ -82,8 +85,11 @@ def finalDf() -> pd.DataFrame:
     namesDf = itemNames()
 
     merged = pd.merge(bazaarDf, namesDf)
+    merged.pop("ID")
+    names = merged.pop("Name")
+    merged.insert(0, "Name", names)
 
-    return merged
+    return merged.sort_values(by=["Profit Margin"])
 
 def printOut(
     pandas_dataframe: pd.DataFrame,
