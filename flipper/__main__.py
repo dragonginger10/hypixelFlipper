@@ -2,4 +2,4 @@ from flipper import cli
 import typer
 
 if __name__ == "__main__":
-    typer.run(cli.call)
+    typer.run(cli.main)

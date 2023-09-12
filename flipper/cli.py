@@ -1,7 +1,13 @@
-from flipper.callApi import callapi
+from flipper.getData import printOut, finalDf
+from rich.console import Console
+from rich.table import Table
 
-def main(name: str):
-    print(f"hello {name}")
+console = Console()
 
-def call():
-    callapi()
+def main():
+    df = finalDf()
+
+    table = Table(show_header=True, header_style="bold cyan")
+
+    table = printOut(df, table)
+    console.print(table)
