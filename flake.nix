@@ -28,7 +28,7 @@
         flipper = with pkgs.python310Packages;
           buildPythonApplication {
             pname = "flipper";
-            version = "0.1";
+            version = "1.0";
             format = "pyproject";
 
             propagatedBuildInputs = [setuptools requests typer rich pandas];
