@@ -29,7 +29,7 @@
             version = "0.1";
             format = "pyproject";
 
-            propagatedBuildInputs = [setuptools requests typer rich ];
+            propagatedBuildInputs = [setuptools requests typer rich pandas];
 
             src = ./.;
           };

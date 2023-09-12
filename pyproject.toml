@@ -11,6 +11,7 @@ dependencies = [
 	"rich",
 	"typer",
   "requests",
+  "pandas",
 ]
 dynamic = ["version"]
 
@@ -21,4 +22,4 @@ flipper = "flipper.cli:main"
 packages = ["flipper"]
 
 [tool.setuptools.dynamic]
-version = {attr = "flipper.__VERSION__"}
+version = {attr = "flipper.__version__"}
