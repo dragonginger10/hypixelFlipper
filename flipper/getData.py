@@ -112,7 +112,7 @@ def printOut(
     for index, value_list in enumerate(pandas_dataframe.to_numpy()):
         row = [str(index)] if show_index else []
         row += [str(x) for x in value_list]
-        name, sellPrice, buyPrice, instaBuys, margin, npcPrice = row
-        rich_table.add_row(name, sellPrice, buyPrice, instaBuys, "{:,.1f}%".format(float(margin)), "${:,.2f}".format(float(npcPrice)))
+        *name, sellPrice, buyPrice, instaBuys, margin, npcPrice = row
+        rich_table.add_row(*name, sellPrice, buyPrice, instaBuys, "{:,.1f}%".format(float(margin)), "${:,.2f}".format(float(npcPrice)))
 
     return rich_table
