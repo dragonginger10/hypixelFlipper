@@ -1,5 +1,7 @@
 # Hypixel Bazaar Flipper
 
+![Bazaar Flips](./img/flipper.png)
+
 ## Description
 
 This app is a basic CLI app to pull down information from the Hypixel API about the Skyblock's
