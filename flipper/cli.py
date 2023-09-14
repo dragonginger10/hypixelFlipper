@@ -23,13 +23,13 @@ def main(
         None, "--version", callback=_version_callback, is_eager=True
     ),
     instabuys: Optional[int] = typer.Option(
-        8000, 
+        10000, 
         "--instabuys",
         "-i",
         help="Number of instabuys in last seven days",
     ),
     profit: Optional[float] = typer.Option(
-        1.0,
+        5.0,
         "--profit",
         "-p",
         help="minimum Profit margin to show"
