@@ -15,9 +15,11 @@ Bazaar. Built using Typer and Pandas, for CLI usability and data organization re
 
 ### From Source 
 
-`git clone https://github.com/dragonginger10/hypixelFlipper.git
+```
+git clone https://github.com/dragonginger10/hypixelFlipper.git
 cd ./hypixelFlipper
-pip install .`
+pip install .
+```
 
 ## Usage
 running `flipper` will pull up a table showing information for bazaar sales with a 5% margin and 10,000 instant buys in the last week.
