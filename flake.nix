@@ -18,7 +18,7 @@
 
       devShells.default = pkgs.mkShell {
         packages = with pkgs;
-          [python3]
+          [python3 vale glow]
           ++ (with pkgs.python3Packages; [pip requests typer python-dotenv rich pandas black isort]);
       };
 
